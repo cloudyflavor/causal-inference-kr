@@ -18,6 +18,8 @@ jobs:
 
       - name: Build the book
         run: myst build --html
+        env:
+          BASE_URL: /causal-inference-kr  # ✏️ 바꿔야 함: 본인 저장소 이름
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
