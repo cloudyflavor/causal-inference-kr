@@ -1,6 +1,0 @@
-format: jb-book
-root: intro_ko        # ✏️ 바꿔야 함: 표지/소개 페이지 파일명 (확장자 제외)
-chapters:
-  - file: chapters/07_beyond_confounders_ko    # ✏️ 바꿔야 함: 챕터 파일명들
-  - file: chapters/08_instrumental_variables_ko
-  - file: chapters/09_non_compliance_late_ko

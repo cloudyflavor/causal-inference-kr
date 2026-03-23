@@ -13,21 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
-        run: pip install "jupyter-book<2"
-
-      - name: Install system dependencies
-        run: sudo apt-get install -y graphviz
+      - name: Install mystmd
+        run: npm install -g mystmd
 
       - name: Build the book
-        run: |
-          jupyter-book build .
-          echo "=== _build/html 내용 ==="
-          ls _build/html/ || echo "비어있음"
+        run: myst build --html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
