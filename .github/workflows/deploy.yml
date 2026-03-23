@@ -20,8 +20,11 @@ jobs:
       - name: Install dependencies
         run: pip install jupyter-book
 
+      - name: Install system dependencies
+        run: sudo apt-get install -y graphviz
+
       - name: Build the book
-        run: jupyter-book build .
+        run: jupyter-book build . --verbose
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
