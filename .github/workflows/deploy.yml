@@ -24,7 +24,10 @@ jobs:
         run: sudo apt-get install -y graphviz
 
       - name: Build the book
-        run: jupyter-book build . --verbose
+        run: |
+          jupyter-book build .
+          echo "=== _build/html 내용 ==="
+          ls _build/html/ || echo "비어있음"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
