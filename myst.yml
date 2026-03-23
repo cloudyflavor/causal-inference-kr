@@ -1,6 +1,6 @@
 version: 1
 project:
-  title: 인과추론 스터디 노트
+  title: Causal Studio
   github: https://github.com/cloudyflavor/causal-inference-kr
   toc:
     - file: intro_ko.md
@@ -9,4 +9,4 @@ project:
     - file: chapters/09_non_compliance_late_ko.ipynb
 site:
   template: book-theme
-  title: 인과추론 스터디 노트
+  title: Causal Studio
