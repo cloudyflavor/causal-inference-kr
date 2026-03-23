@@ -18,6 +18,8 @@ jobs:
 
       - name: Build the book
         run: myst build --html
+        env:
+          BASE_URL: /${{ github.event.repository.name }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

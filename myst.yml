@@ -10,4 +10,3 @@ project:
 site:
   template: book-theme
   title: 인과추론 스터디 노트
-  baseurl: /causal-inference-kr/
