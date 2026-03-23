@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>07 — Beyond Confounders &#8212; 인과추론 스터디 노트</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/07_beyond_confounders_ko';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="08 — Instrumental Variables" href="08_instrumental_variables_ko.html" />
+    <link rel="prev" title="인과추론 스터디 노트" href="../intro_ko.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro_ko.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">인과추론 스터디 노트</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro_ko.html">
+                    인과추론 스터디 노트
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">07 — Beyond Confounders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_instrumental_variables_ko.html">08 — Instrumental Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_non_compliance_late_ko.html">09 — Non Compliance and LATE</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chapters/07_beyond_confounders_ko.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>07 — Beyond Confounders</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#y">1. 좋은 통제변수 — 결과(Y)를 잘 예측하는 변수</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fwl-frisch-waugh-lovell">FWL(Frisch-Waugh-Lovell) 정리</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t">2. 해로운 통제변수 — 처치(T)만 예측하는 변수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3. 나쁜 통제변수 — 선택 편향을 만들어내는 변수</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3-1. 처치(T) 이후에 발생하는 변수</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bad-cop-conditional-on-positives">3-2. Bad COP (Conditional on Positives)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">핵심 정리</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="beyond-confounders">
+<h1>07 — Beyond Confounders<a class="headerlink" href="#beyond-confounders" title="Link to this heading">#</a></h1>
+<p><strong>통제변수를 무조건 많이 넣으면 좋을까? 교란변수 너머의 이야기</strong></p>
+<hr class="docutils" />
+<p>교란변수(Confounder)를 통제해야 한다는 건 알겠는데, 그 외의 변수들은 어떻게 해야 할까요? 많이 넣을수록 좋다고 생각하기 쉽지만, 변수에 따라 효과를 더 정밀하게 추정해주기도 하고, 오히려 표준오차를 키우거나, 심지어 편향을 만들어내기도 합니다.</p>
+<p>이 챕터에서는 통제변수를 세 가지 유형으로 나눠서 살펴봅니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">expit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">graphviz</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PATH&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">pathsep</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;C:\Program Files\Graphviz\bin&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="y">
+<h2>1. 좋은 통제변수 — 결과(Y)를 잘 예측하는 변수<a class="headerlink" href="#y" title="Link to this heading">#</a></h2>
+<p>핀테크 회사에서 연체 고객에게 이메일을 보내는 실험을 합니다. 5,000명에게 무작위로 이메일(처치)을 발송하고, 이것이 지불금액(결과)에 미치는 효과를 분석합니다. 이메일은 무작위 배정이므로 단순히 이메일 받은 사람과 안 받은 사람의 평균 차이로 ATE를 추정할 수 있을 것 같습니다.</p>
+<p>그런데 데이터에는 두 가지 변수가 더 있습니다. <code class="docutils literal notranslate"><span class="pre">credit_limit</span></code>(신용한도)과 <code class="docutils literal notranslate"><span class="pre">risk_score</span></code>(리스크 점수)입니다. 이 변수들은 이메일 발송 여부와 무관합니다(무작위 배정이니까요). 하지만 지불금액을 매우 잘 예측합니다. 신용한도가 높은 고객은 원래 지불금액이 많고, 리스크 점수가 높은 고객은 적습니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s2">&quot;LR&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">g</span><span class="o">.</span><span class="n">subgraph</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rank</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;X1&quot;</span><span class="p">,</span> <span class="s2">&quot;신용한도 (X1)&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;plaintext&quot;</span><span class="p">)</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;X2&quot;</span><span class="p">,</span> <span class="s2">&quot;리스크 점수 (X2)&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;plaintext&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;이메일 (T)&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;지불금액 (Y)&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;X1&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;X2&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;알고 싶은 효과&quot;</span><span class="p">)</span>
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f0c10a1d1b10e12b9c008dcc235c9c0f797d744d0d2ca9ef935231a9f9ad40c7.svg" src="../_images/f0c10a1d1b10e12b9c008dcc235c9c0f797d744d0d2ca9ef935231a9f9ad40c7.svg" />
+</div>
+</div>
+<p>DAG를 보면, 신용한도와 리스크 점수는 이메일의 원인이 아닙니다. 처치(T)로 가는 화살표가 없으니 교란변수가 아닙니다. 그렇다면 모델에 넣어야 할까요?</p>
+<section id="fwl-frisch-waugh-lovell">
+<h3>FWL(Frisch-Waugh-Lovell) 정리<a class="headerlink" href="#fwl-frisch-waugh-lovell" title="Link to this heading">#</a></h3>
+<p>통계학의 강력한 결과 중 하나입니다. 회귀모형에 통제변수를 추가하는 것은, 처치와 결과 각각에서 그 통제변수의 영향을 제거한 잔차끼리 회귀하는 것과 정확히 동일합니다.</p>
+<div class="math notranslate nohighlight">
+\[\tilde{Y} = Y - \hat{Y}_{controls}, \qquad \tilde{T} = T - \hat{T}_{controls}\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\kappa}_{FWL} = \frac{Cov(\tilde{T},\, \tilde{Y})}{Var(\tilde{T})}\]</div>
+<p>신용한도와 리스크 점수가 지불금액 분산의 상당 부분을 설명합니다. 이것들을 통제하면 <span class="math notranslate nohighlight">\(\tilde{Y}\)</span>의 분산이 크게 줄어들고, 결과적으로 이메일 계수의 <strong>표준오차(SE)가 감소</strong>합니다. 추정치 자체는 거의 변하지 않지만, 훨씬 정밀해집니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">credit_limit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">()</span>
+<span class="n">risk_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">email</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">payments</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">credit_limit</span> <span class="o">-</span> <span class="mi">400</span> <span class="o">*</span> <span class="n">risk_score</span>
+            <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">email</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">payments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">payments</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+    <span class="n">payments</span><span class="o">=</span><span class="n">payments</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+    <span class="n">credit_limit</span><span class="o">=</span><span class="n">credit_limit</span><span class="p">,</span> <span class="n">risk_score</span><span class="o">=</span><span class="n">risk_score</span>
+<span class="p">))</span>
+
+<span class="n">m_simple</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;payments ~ email&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">m_ctrl</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;payments ~ email + credit_limit + risk_score&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">resid_Y</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;payments ~ credit_limit + risk_score&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">resid</span>
+<span class="n">resid_T</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;email ~ credit_limit + risk_score&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">resid</span>
+<span class="n">fwl</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;resid_Y ~ resid_T&quot;</span><span class="p">,</span>
+              <span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;resid_Y&quot;</span><span class="p">:</span> <span class="n">resid_Y</span><span class="p">,</span> <span class="s2">&quot;resid_T&quot;</span><span class="p">:</span> <span class="n">resid_T</span><span class="p">}))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;모델&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;통제 없음&quot;</span><span class="p">,</span> <span class="s2">&quot;통제 추가&quot;</span><span class="p">,</span> <span class="s2">&quot;FWL&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;email 계수&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m_simple</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">],</span> <span class="n">m_ctrl</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">],</span> <span class="n">fwl</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;resid_T&quot;</span><span class="p">]],</span>
+    <span class="s2">&quot;SE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m_simple</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">],</span> <span class="n">m_ctrl</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">],</span> <span class="n">fwl</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="s2">&quot;resid_T&quot;</span><span class="p">]]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>모델</th>
+      <th>email 계수</th>
+      <th>SE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>통제 없음</td>
+      <td>-2.7232</td>
+      <td>4.2340</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>통제 추가</td>
+      <td>4.0550</td>
+      <td>1.3988</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>FWL</td>
+      <td>4.0550</td>
+      <td>1.3985</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>계수는 거의 동일하지만 SE가 크게 줄어든 것을 확인할 수 있습니다. 통제 없이는 p값이 0.07로 유의하지 않았던 것이 통제 후에는 p &lt; 0.001로 명확해집니다.</p>
+<blockquote>
+<div><p><strong>좋은 통제변수의 조건</strong><br />
+결과(Y)를 잘 예측하는 변수라면, 처치(T)와 무관하더라도 모델에 추가할 가치가 있습니다. SE를 줄여서 같은 샘플 크기로 더 정밀한 추정을 할 수 있기 때문입니다. ATE 추정치 자체는 바뀌지 않습니다.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="t">
+<h2>2. 해로운 통제변수 — 처치(T)만 예측하는 변수<a class="headerlink" href="#t" title="Link to this heading">#</a></h2>
+<p>두 병원에서 신약 실험을 합니다. 진짜 약을 복용하면 입원 기간이 줄어들 것입니다. 병원 A는 주로 경증 환자를 받고 10%에게만 진짜 약을 투여하며, 병원 B는 주로 중증 환자를 받고 90%에게 진짜 약을 투여합니다.</p>
+<p>교란변수는 <strong>중증도(severity)</strong> 입니다. 중증도가 높으면 입원 기간도 길고, 진짜 약을 받을 확률도 높습니다. 그렇다면 <code class="docutils literal notranslate"><span class="pre">hospital</span></code>(병원) 변수는 어떨까요? 병원은 처치를 잘 예측하지만, 중증도를 통제하고 나면 입원 기간과 무관합니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g2</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s2">&quot;LR&quot;</span><span class="p">)</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;sev&quot;</span><span class="p">,</span> <span class="s2">&quot;중증도 (sev)&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;filled&quot;</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="s2">&quot;lightyellow&quot;</span><span class="p">)</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;hosp&quot;</span><span class="p">,</span> <span class="s2">&quot;병원 (hosp)&quot;</span><span class="p">)</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;처치 (T)&quot;</span><span class="p">)</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;입원일수 (Y)&quot;</span><span class="p">)</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;sev&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;sev&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;hosp&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">g2</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;알고 싶은 효과&quot;</span><span class="p">)</span>
+<span class="n">g2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/34b6a600ce453f15256254c392ea6ace5f67c0e69c10e14a01e547bb5197920c.svg" src="../_images/34b6a600ce453f15256254c392ea6ace5f67c0e69c10e14a01e547bb5197920c.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_h</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">hospital</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n_h</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">n_h</span><span class="p">)</span>
+<span class="n">severity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n_h</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n_h</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="n">treatment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">n_h</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">n_h</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="n">days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span> <span class="o">-</span> <span class="mi">8</span><span class="o">*</span><span class="n">treatment</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">severity</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_h</span><span class="p">))</span>
+
+<span class="n">hosp_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+    <span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">treatment</span><span class="o">=</span><span class="n">treatment</span><span class="p">,</span>
+    <span class="n">severity</span><span class="o">=</span><span class="n">severity</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">hospital</span><span class="o">=</span><span class="n">hospital</span>
+<span class="p">))</span>
+
+<span class="n">m1</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;days ~ treatment&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">hosp_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;days ~ treatment + severity&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">hosp_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">m3</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;days ~ treatment + severity + hospital&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">hosp_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;모델&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;통제 없음&quot;</span><span class="p">,</span> <span class="s2">&quot;중증도 통제&quot;</span><span class="p">,</span> <span class="s2">&quot;중증도 + 병원&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;treatment 계수&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m1</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">],</span> <span class="n">m2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">],</span> <span class="n">m3</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">]],</span>
+    <span class="s2">&quot;SE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m1</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">],</span> <span class="n">m2</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">],</span> <span class="n">m3</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="s2">&quot;treatment&quot;</span><span class="p">]]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>모델</th>
+      <th>treatment 계수</th>
+      <th>SE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>통제 없음</td>
+      <td>7.654</td>
+      <td>1.374</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>중증도 통제</td>
+      <td>-9.230</td>
+      <td>0.917</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>중증도 + 병원</td>
+      <td>-9.593</td>
+      <td>1.098</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>병원을 추가하면 계수는 비슷하지만 SE가 커집니다. 표준오차 공식의 분모에는 처치 변수의 분산이 있는데, <code class="docutils literal notranslate"><span class="pre">hospital</span></code>을 추가하면 같은 병원 내에서의 처치 변동만 남아 유효 분산이 줄어들기 때문입니다.</p>
+<blockquote>
+<div><p><strong>해로운 통제변수의 조건</strong><br />
+처치(T)만 예측하고 결과(Y)와는 무관한 변수는 넣지 않는 게 낫습니다. 계수는 비슷하게 유지되지만 SE가 불필요하게 커져서 통계적 검정력이 떨어집니다.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2>3. 나쁜 통제변수 — 선택 편향을 만들어내는 변수<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h3>3-1. 처치(T) 이후에 발생하는 변수<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>다시 이메일 실험으로 돌아옵니다. 이번엔 두 가지 변수를 추가로 살펴봅니다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">opened</span></code>: 이메일을 열었는지 여부</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">agreement</span></code>: 이메일 수신 후 부서에 연락해 채무 협상을 한 경우</p></li>
+</ul>
+<p>직관적으로 생각해보면, 이메일을 받지 않으면 열 수 없습니다. <code class="docutils literal notranslate"><span class="pre">agreement</span></code>도 이메일 수신 후에 가능합니다. 이 변수들은 이메일이 원인이 되어 발생한 결과입니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g3</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s2">&quot;LR&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;이메일 (T)&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;op&quot;</span><span class="p">,</span> <span class="s2">&quot;opened (op)&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;filled&quot;</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="s2">&quot;#ffcccc&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;ag&quot;</span><span class="p">,</span> <span class="s2">&quot;agreement (ag)&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;filled&quot;</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="s2">&quot;#ffcccc&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;지불금액 (Y)&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;op&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;ag&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;op&quot;</span><span class="p">,</span> <span class="s2">&quot;ag&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;op&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;ag&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">g3</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;총 효과&quot;</span><span class="p">)</span>
+<span class="n">g3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7e83f725d3847d1d8941d4f164cb2574242bcad093cb6b5cf544077f4a9dadb7.svg" src="../_images/7e83f725d3847d1d8941d4f164cb2574242bcad093cb6b5cf544077f4a9dadb7.svg" />
+</div>
+</div>
+<p>만약 <code class="docutils literal notranslate"><span class="pre">agreement</span></code>를 통제하면, 우리는 사실 이렇게 묻는 것입니다. <em>“agreement가 고정되었을 때, 이메일의 효과는?”</em> 하지만 이메일이 지불금액을 높이는 핵심 경로 중 하나가 agreement를 늘리는 것인데, 그 경로를 막아버리면 이메일의 실제 효과가 과소추정됩니다.</p>
+<p>더 심각한 문제가 있습니다. <code class="docutils literal notranslate"><span class="pre">agreement=0</span></code>인 사람들을 비교한다고 해봅시다.</p>
+<ul class="simple">
+<li><p><strong>T=0, agreement=0:</strong> 이메일을 못 받아서 agreement를 못 한 사람 (성실하지만 기회가 없었던 채무자 포함)</p></li>
+<li><p><strong>T=1, agreement=0:</strong> 이메일을 받고도 agreement를 하지 않은 사람 (완강하게 거부한 채무자)</p></li>
+</ul>
+<p>같은 <code class="docutils literal notranslate"><span class="pre">agreement=0</span></code>이지만 전혀 다른 유형입니다. 무작위 배정이어도 <code class="docutils literal notranslate"><span class="pre">agreement</span></code>를 조건으로 걸면 두 그룹이 더 이상 비교 가능하지 않습니다. 이것이 <strong>선택 편향(Selection Bias)</strong> 입니다.</p>
+<blockquote>
+<div><p><strong>나쁜 통제변수 유형 1: 처치 경로 위의 변수</strong><br />
+T → opened → agreement → Y처럼, 처치에서 결과로 가는 경로 위에 있는 변수는 절대 통제하면 안 됩니다.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">credit_limit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">()</span>
+<span class="n">risk_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">email</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">opened</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">email</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">agreement</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">expit</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">opened</span> <span class="o">+</span> <span class="n">email</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">payments</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span> <span class="o">+</span> <span class="mf">0.3</span><span class="o">*</span><span class="n">credit_limit</span> <span class="o">-</span> <span class="mi">400</span><span class="o">*</span><span class="n">risk_score</span>
+            <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">email</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">opened</span> <span class="o">+</span> <span class="mi">20</span><span class="o">*</span><span class="n">agreement</span>
+            <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">payments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">payments</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">()</span>
+
+<span class="n">bad_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+    <span class="n">payments</span><span class="o">=</span><span class="n">payments</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+    <span class="n">opened</span><span class="o">=</span><span class="n">opened</span><span class="p">,</span> <span class="n">agreement</span><span class="o">=</span><span class="n">agreement</span><span class="p">,</span>
+    <span class="n">credit_limit</span><span class="o">=</span><span class="n">credit_limit</span><span class="p">,</span> <span class="n">risk_score</span><span class="o">=</span><span class="n">risk_score</span>
+<span class="p">))</span>
+
+<span class="n">m_ok</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;payments ~ email + credit_limit + risk_score&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">bad_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">m_open</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;payments ~ email + opened + credit_limit + risk_score&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">bad_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">m_agree</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;payments ~ email + agreement + credit_limit + risk_score&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">bad_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;모델&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;올바른 모델&quot;</span><span class="p">,</span> <span class="s2">&quot;opened 추가&quot;</span><span class="p">,</span> <span class="s2">&quot;agreement 추가&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;email 계수&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m_ok</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">],</span> <span class="n">m_open</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">],</span> <span class="n">m_agree</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">]]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>모델</th>
+      <th>email 계수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>올바른 모델</td>
+      <td>24.760</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>opened 추가</td>
+      <td>6.587</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>agreement 추가</td>
+      <td>8.802</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>처치 경로 위의 변수를 통제할수록 이메일 효과 추정치가 줄어드는 것을 확인할 수 있습니다.</p>
+</section>
+<hr class="docutils" />
+<section id="bad-cop-conditional-on-positives">
+<h3>3-2. Bad COP (Conditional on Positives)<a class="headerlink" href="#bad-cop-conditional-on-positives" title="Link to this heading">#</a></h3>
+<p>마케팅 캠페인이 고객 지출에 미치는 효과를 분석합니다. 데이터를 열어보니 구매하지 않은 고객(<span class="math notranslate nohighlight">\(Y=0\)</span>)이 엄청나게 많습니다. 일부 분석가들은 “0이 너무 많아서 분석이 어렵다”며 구매자(<span class="math notranslate nohighlight">\(Y &gt; 0\)</span>)만 걸러서 분석합니다. 이것이 <strong>COP(Conditional on Positives)</strong> 입니다.</p>
+<p>고객을 두 종류로 나눠서 생각해봅시다.</p>
+<ul class="simple">
+<li><p><strong>부유한 고객(rich):</strong> 캠페인이 없어도 어차피 삽니다. 항상 <span class="math notranslate nohighlight">\(Y &gt; 0\)</span>.</p></li>
+<li><p><strong>절약형 고객(frugal):</strong> 캠페인이 있어야만 삽니다. 캠페인 없으면 <span class="math notranslate nohighlight">\(Y = 0\)</span>.</p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(Y &gt; 0\)</span>인 고객만 보면 처치군에는 frugal 고객이 섞여있고(소득 낮음), 통제군은 모두 rich 고객입니다. 이 두 그룹은 처음부터 달랐습니다.</p>
+<blockquote>
+<div><p><strong>나쁜 통제변수 유형 2: Bad COP</strong><br />
+<span class="math notranslate nohighlight">\(Y &gt; 0\)</span>만 골라서 분석하는 것은 처치 결과에 의해 만들어진 선택 편향입니다. 0이 많아서 불편하더라도, 0은 중요한 정보입니다.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">marketing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">rich</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">spend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+    <span class="n">rich</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">marketing</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">spend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">spend</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">()</span>
+<span class="n">cop_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">spend</span><span class="o">=</span><span class="n">spend</span><span class="p">,</span> <span class="n">marketing</span><span class="o">=</span><span class="n">marketing</span><span class="p">,</span> <span class="n">rich</span><span class="o">=</span><span class="n">rich</span><span class="p">))</span>
+
+<span class="n">ate_correct</span> <span class="o">=</span> <span class="n">cop_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;marketing&quot;</span><span class="p">)[</span><span class="s2">&quot;spend&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">buyers</span> <span class="o">=</span> <span class="n">cop_data</span><span class="p">[</span><span class="n">cop_data</span><span class="p">[</span><span class="s2">&quot;spend&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">ate_cop</span> <span class="o">=</span> <span class="n">buyers</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;marketing&quot;</span><span class="p">)[</span><span class="s2">&quot;spend&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;분석 방법&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;전체 데이터 (올바른 ATE)&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad COP (구매자만)&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;추정 ATE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ate_correct</span><span class="p">,</span> <span class="n">ate_cop</span><span class="p">]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>분석 방법</th>
+      <th>추정 ATE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>전체 데이터 (올바른 ATE)</td>
+      <td>138.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bad COP (구매자만)</td>
+      <td>-69.7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>핵심 정리<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>통제변수를 결정할 때는 항상 <strong>인과 그래프(DAG)를 먼저 그려보세요.</strong> 그래프 없이 통계적 직관만으로 판단하면 실수할 가능성이 높습니다.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>변수 종류</p></th>
+<th class="head text-left"><p>특징</p></th>
+<th class="head text-left"><p>판단</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>교란변수</p></td>
+<td class="text-left"><p>T와 Y 모두의 원인</p></td>
+<td class="text-left"><p>반드시 통제</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Y 예측 변수</p></td>
+<td class="text-left"><p>Y를 잘 예측, T와 무관</p></td>
+<td class="text-left"><p>SE 감소 효과</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>T만 예측</p></td>
+<td class="text-left"><p>T의 원인이지만 Y와 무관</p></td>
+<td class="text-left"><p>안 넣는 게 나음</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>T의 결과</p></td>
+<td class="text-left"><p>T → 변수 → Y 경로 위</p></td>
+<td class="text-left"><p>절대 금지</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Y 필터링(COP)</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(Y &gt; 0\)</span> 조건부 분석</p></td>
+<td class="text-left"><p>절대 금지</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><em>참고: Matheus Facure, Python Causality Handbook, Chapter 07 — Beyond Confounders</em></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro_ko.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">인과추론 스터디 노트</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="08_instrumental_variables_ko.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">08 — Instrumental Variables</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#y">1. 좋은 통제변수 — 결과(Y)를 잘 예측하는 변수</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fwl-frisch-waugh-lovell">FWL(Frisch-Waugh-Lovell) 정리</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t">2. 해로운 통제변수 — 처치(T)만 예측하는 변수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3. 나쁜 통제변수 — 선택 편향을 만들어내는 변수</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3-1. 처치(T) 이후에 발생하는 변수</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bad-cop-conditional-on-positives">3-2. Bad COP (Conditional on Positives)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">핵심 정리</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By cloudyflavor
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

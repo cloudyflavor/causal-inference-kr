@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>09 — Non Compliance and LATE &#8212; 인과추론 스터디 노트</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/09_non_compliance_late_ko';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="08 — Instrumental Variables" href="08_instrumental_variables_ko.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro_ko.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">인과추론 스터디 노트</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro_ko.html">
+                    인과추론 스터디 노트
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="07_beyond_confounders_ko.html">07 — Beyond Confounders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_instrumental_variables_ko.html">08 — Instrumental Variables</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">09 — Non Compliance and LATE</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/chapters/09_non_compliance_late_ko.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>09 — Non Compliance and LATE</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1) 4가지 컴플라이언스 유형</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#push-non-compliance">2) Push 마케팅 예시: Non-Compliance의 함정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ols">3) OLS가 왜 틀리는가?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itt-intent-to-treat">4) ITT(Intent-to-Treat): 편향 없지만 희석된 추정치</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#late-complier">5) LATE: Complier에 대한 처치 효과</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wald-estimator">5-1. 1단계와 Wald Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sls-late">5-2. 2SLS로 LATE 구하기</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#late">6) 단조성 가정과 LATE의 전제 조건</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itt-vs-late">7) ITT vs LATE: 어떤 질문에 답하는가?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">핵심 정리</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="non-compliance-and-late">
+<h1>09 — Non Compliance and LATE<a class="headerlink" href="#non-compliance-and-late" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>실험 배정을 따르지 않는 사람이 있을 때, 우리는 어떤 효과를 측정하게 될까?</p>
+</div></blockquote>
+<p>잘 설계된 RCT도 현실에서는 완벽히 실행되지 않습니다. 처치군에 배정됐는데 처치를 거부하거나, 통제군인데 어떻게든 처치를 받는 사람이 생깁니다. 이것이 <strong>불이행(Non-Compliance)</strong> 입니다.</p>
+<p>이 챕터는 도구변수(IV)를 새로운 시각으로 바라봅니다. 8장에서는 IV를 “관찰 불가 교란변수를 우회하는 방법”으로 배웠다면, 여기서는 IV를 “인과 사슬의 시작점”으로 봅니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">expit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">graphviz</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">linearmodels.iv</span><span class="w"> </span><span class="kn">import</span> <span class="n">IV2SLS</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">pathsep</span> <span class="o">+</span> <span class="sa">r</span><span class="s2">&quot;C:\Program Files\Graphviz\bin&quot;</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+    <span class="s2">&quot;font.family&quot;</span><span class="p">:</span> <span class="s2">&quot;Malgun Gothic&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;axes.unicode_minus&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;figure.figsize&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s2">&quot;axes.spines.top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;axes.spines.right&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;axes.grid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;grid.alpha&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">BLUE</span><span class="p">,</span> <span class="n">ORANGE</span><span class="p">,</span> <span class="n">GREEN</span><span class="p">,</span> <span class="n">RED</span><span class="p">,</span> <span class="n">PURPLE</span><span class="p">,</span> <span class="n">GRAY</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;#4c72b0&quot;</span><span class="p">,</span> <span class="s2">&quot;#dd8452&quot;</span><span class="p">,</span> <span class="s2">&quot;#55a868&quot;</span><span class="p">,</span> <span class="s2">&quot;#c44e52&quot;</span><span class="p">,</span> <span class="s2">&quot;#9370db&quot;</span><span class="p">,</span> <span class="s2">&quot;#8c8c8c&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="id1">
+<h2>1) 4가지 컴플라이언스 유형<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>도구변수(<span class="math notranslate nohighlight">\(Z\)</span>, 배정 여부)에 어떻게 반응하느냐에 따라 사람들을 4가지 집단으로 나눌 수 있습니다. 각 집단은 잠재적 처치 <span class="math notranslate nohighlight">\((T_0, T_1)\)</span>로 정의됩니다. <span class="math notranslate nohighlight">\(T_z\)</span>는 “<span class="math notranslate nohighlight">\(Z=z\)</span>로 배정되었을 때의 실제 처치”를 뜻합니다.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>집단</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(T_0\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(T_1\)</span></p></th>
+<th class="head"><p>설명</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Compliers</strong></p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>배정대로 따르는 사람</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Never Takers</strong></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>배정에 관계없이 처치를 받지 않는 사람</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Always Takers</strong></p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>배정에 관계없이 항상 처치를 받는 사람</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Defierers</strong></p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>배정의 반대로 행동 (현실에서는 거의 없다고 가정)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>한 가지 중요한 점이 있습니다. 데이터에서 각 사람이 어느 집단인지 <strong>알 수 없습니다.</strong> <span class="math notranslate nohighlight">\(Z=0\)</span>으로 배정된 사람이 <span class="math notranslate nohighlight">\(T=0\)</span>이면 Complier인지 Never Taker인지 구분할 방법이 없습니다.</p>
+<p>아래 DAG는 일반적인 IV 구조입니다. <span class="math notranslate nohighlight">\(Z\)</span>(배정)이 <span class="math notranslate nohighlight">\(T\)</span>(실제 처치)에 영향을 주고, 관찰 불가 교란변수 <span class="math notranslate nohighlight">\(U\)</span>가 <span class="math notranslate nohighlight">\(T\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span> 모두에 영향을 줍니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dot</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s1">&#39;LR&#39;</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;rounded,filled&#39;</span><span class="p">,</span> <span class="n">fontname</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;Z = 배정&#39;</span><span class="p">,</span>       <span class="n">fillcolor</span><span class="o">=</span><span class="s1">&#39;#e0e7ff&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4338ca&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;T = 실제 처치&#39;</span><span class="p">,</span>  <span class="n">fillcolor</span><span class="o">=</span><span class="s1">&#39;#dcfce7&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#15803d&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Y = 결과&#39;</span><span class="p">,</span>       <span class="n">fillcolor</span><span class="o">=</span><span class="s1">&#39;#fef9c3&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a16207&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;U = 관찰 불가 교란변수&#39;</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="s1">&#39;#fee2e2&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b91c1c&#39;</span><span class="p">,</span>
+         <span class="n">style</span><span class="o">=</span><span class="s1">&#39;rounded,filled,dashed&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1st Stage&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b91c1c&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b91c1c&#39;</span><span class="p">)</span>
+<span class="n">dot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3d49a49c9bb1e28d742d78526e6ad8f527a9fba1e83d6502bf84a2d98fe7a193.svg" src="../_images/3d49a49c9bb1e28d742d78526e6ad8f527a9fba1e83d6502bf84a2d98fe7a193.svg" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="push-non-compliance">
+<h2>2) Push 마케팅 예시: Non-Compliance의 함정<a class="headerlink" href="#push-non-compliance" title="Link to this heading">#</a></h2>
+<p>앱 내 구매를 늘리기 위해 Push 마케팅 실험을 합니다. 5,000명에게 무작위로 Push 배정(<span class="math notranslate nohighlight">\(Z\)</span>)을 합니다. 그런데 소득이 낮은 고객은 구형 스마트폰을 가지고 있어 Push가 전달되지 않습니다(Never Taker). 소득은 인앱 구매에도 직접 영향을 주므로, <strong>소득</strong>이 <span class="math notranslate nohighlight">\(T\)</span>(실제 수신)와 <span class="math notranslate nohighlight">\(Y\)</span>(구매) 모두에 영향을 주는 관찰 불가 교란변수가 됩니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dot2</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Digraph</span><span class="p">()</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s1">&#39;LR&#39;</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;rounded,filled&#39;</span><span class="p">,</span> <span class="n">fontname</span><span class="o">=</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;push_assigned (Z)&#39;</span><span class="p">,</span>   <span class="n">fillcolor</span><span class="o">=</span><span class="s1">&#39;#f5f3ff&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#7c3aed&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;push_delivered (T)&#39;</span><span class="p">,</span>  <span class="n">fillcolor</span><span class="o">=</span><span class="s1">&#39;#dcfce7&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#15803d&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;in_app_purchase (Y)&#39;</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="s1">&#39;#fef9c3&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#a16207&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;income [관찰 불가]&#39;</span><span class="p">,</span> <span class="n">fillcolor</span><span class="o">=</span><span class="s1">&#39;#fee2e2&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b91c1c&#39;</span><span class="p">,</span>
+         <span class="n">style</span><span class="o">=</span><span class="s1">&#39;rounded,filled,dashed&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;1st Stage&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b91c1c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;구형폰&#39;</span><span class="p">)</span>
+<span class="n">dot2</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#b91c1c&#39;</span><span class="p">)</span>
+<span class="n">dot2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ffd1183e8805998ebd567de60f3e9530a21d7a229035bd2898bc860f5ca99cff.svg" src="../_images/ffd1183e8805998ebd567de60f3e9530a21d7a229035bd2898bc860f5ca99cff.svg" />
+</div>
+</div>
+<p>아래에서 데이터를 생성합니다. 진짜 LATE(Push 수신의 효과)는 <strong>3.0</strong>으로 설정합니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">income</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">push_assigned</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">has_new_phone</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">expit</span><span class="p">((</span><span class="n">income</span> <span class="o">-</span> <span class="mi">50</span><span class="p">)</span> <span class="o">/</span> <span class="mi">15</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">push_delivered</span> <span class="o">=</span> <span class="n">push_assigned</span> <span class="o">*</span> <span class="n">has_new_phone</span>
+<span class="n">in_app_purchase</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">+</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">income</span> <span class="o">+</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">push_delivered</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;push_assigned&#39;</span><span class="p">:</span> <span class="n">push_assigned</span><span class="p">,</span>
+    <span class="s1">&#39;push_delivered&#39;</span><span class="p">:</span> <span class="n">push_delivered</span><span class="p">,</span>
+    <span class="s1">&#39;in_app_purchase&#39;</span><span class="p">:</span> <span class="n">in_app_purchase</span><span class="p">,</span>
+    <span class="s1">&#39;income&#39;</span><span class="p">:</span> <span class="n">income</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">push_assigned</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">push_delivered</span><span class="p">,</span>
+            <span class="n">rownames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;push_assigned (Z)&#39;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;push_delivered (T)&#39;</span><span class="p">],</span>
+            <span class="n">normalize</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>push_delivered (T)</th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>push_assigned (Z)</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.000</td>
+      <td>0.000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.505</td>
+      <td>0.495</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>교차표에서, <span class="math notranslate nohighlight">\(Z=0\)</span>인 사람은 100% <span class="math notranslate nohighlight">\(T=0\)</span>이고, <span class="math notranslate nohighlight">\(Z=1\)</span>인 사람은 약 절반(49.5%)만 실제로 Push를 받았습니다. 나머지 50.5%는 배정받았지만 구형폰이라 못 받은 Never Taker입니다.</p>
+</section>
+<hr class="docutils" />
+<section id="ols">
+<h2>3) OLS가 왜 틀리는가?<a class="headerlink" href="#ols" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">push_delivered</span></code>를 처치변수로 OLS를 돌리면 <code class="docutils literal notranslate"><span class="pre">push_delivered=1</span></code>인 그룹은 신형폰 → 소득 높음 → 원래 구매를 많이 하는 사람들입니다. 반면 <code class="docutils literal notranslate"><span class="pre">push_delivered=0</span></code>에는 소득이 낮은 Never Taker가 섞여 있습니다. 이 두 그룹을 비교하면 Push의 효과가 아니라 <strong>소득 차이</strong>를 측정하게 됩니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m_ols</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;in_app_purchase ~ push_assigned + push_delivered&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">m_ols</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">&quot;계수&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>계수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>70.153</td>
+    </tr>
+    <tr>
+      <th>push_assigned</th>
+      <td>-2.630</td>
+    </tr>
+    <tr>
+      <th>push_delivered</th>
+      <td>8.411</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">push_delivered</span></code> 계수가 8.4로 참값 3.0의 거의 세 배입니다. 게다가 <code class="docutils literal notranslate"><span class="pre">push_assigned</span></code> 계수가 음수(-2.6)인데, “배정받으면 오히려 구매가 줄어든다”는 말이 되어 직관에 완전히 반합니다. 소득이라는 관찰 불가 교란변수가 OLS를 망가뜨린 결과입니다.</p>
+</section>
+<hr class="docutils" />
+<section id="itt-intent-to-treat">
+<h2>4) ITT(Intent-to-Treat): 편향 없지만 희석된 추정치<a class="headerlink" href="#itt-intent-to-treat" title="Link to this heading">#</a></h2>
+<p>실제 처치(<code class="docutils literal notranslate"><span class="pre">push_delivered</span></code>) 대신 <strong>배정 여부</strong>(<code class="docutils literal notranslate"><span class="pre">push_assigned</span></code>)를 처치변수로 사용하는 것이 ITT입니다. 배정은 무작위이므로 소득과 무관합니다.</p>
+<div class="math notranslate nohighlight">
+\[ITT = E[Y \mid Z=1] - E[Y \mid Z=0]\]</div>
+<p>단, ITT는 “Push 배정”의 효과이지 “Push 전달”의 효과가 아닙니다. Never Taker들은 Push를 받지 못해 효과가 0이므로 ITT가 희석됩니다.</p>
+<div class="math notranslate nohighlight">
+\[ITT = LATE \times P(\text{Complier})\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m_itt</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;in_app_purchase ~ push_assigned&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">itt</span>   <span class="o">=</span> <span class="n">m_itt</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;push_assigned&#39;</span><span class="p">]</span>
+<span class="n">m_itt</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s2">&quot;계수&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>계수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>70.153</td>
+    </tr>
+    <tr>
+      <th>push_assigned</th>
+      <td>1.531</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>ITT = 1.53으로 편향은 없지만 참값 3.0보다 작습니다. Complier 비율(약 49%)만큼 희석된 것입니다.</p>
+</section>
+<hr class="docutils" />
+<section id="late-complier">
+<h2>5) LATE: Complier에 대한 처치 효과<a class="headerlink" href="#late-complier" title="Link to this heading">#</a></h2>
+<section id="wald-estimator">
+<h3>5-1. 1단계와 Wald Estimator<a class="headerlink" href="#wald-estimator" title="Link to this heading">#</a></h3>
+<p>ITT를 Complier 비율(1단계)로 나누면 희석이 되돌아옵니다.</p>
+<div class="math notranslate nohighlight">
+\[LATE = \frac{ITT}{\text{1st Stage}} = \frac{E[Y \mid Z=1] - E[Y \mid Z=0]}{E[T \mid Z=1] - E[T \mid Z=0]}\]</div>
+<p>분모인 1단계는 <span class="math notranslate nohighlight">\(P(\text{Complier})\)</span>와 같습니다. 결국 LATE는 <strong>Complier에 대한 ATE</strong>입니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m_first</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s2">&quot;push_delivered ~ push_assigned&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">first_stage</span> <span class="o">=</span> <span class="n">m_first</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;push_assigned&#39;</span><span class="p">]</span>
+<span class="n">late_wald</span> <span class="o">=</span> <span class="n">itt</span> <span class="o">/</span> <span class="n">first_stage</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;추정량&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1st Stage (Complier 비율)&quot;</span><span class="p">,</span> <span class="s2">&quot;ITT&quot;</span><span class="p">,</span> <span class="s2">&quot;LATE (Wald)&quot;</span><span class="p">,</span> <span class="s2">&quot;참값&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;값&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">first_stage</span><span class="p">,</span> <span class="n">itt</span><span class="p">,</span> <span class="n">late_wald</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>추정량</th>
+      <th>값</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1st Stage (Complier 비율)</td>
+      <td>0.4947</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ITT</td>
+      <td>1.5311</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>LATE (Wald)</td>
+      <td>3.0950</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>참값</td>
+      <td>3.0000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>1단계 계수(0.495)가 Complier 비율입니다. ITT(1.53)를 이로 나누면 LATE = 3.09로, 참값 3.0에 매우 가깝습니다.</p>
+</section>
+<section id="sls-late">
+<h3>5-2. 2SLS로 LATE 구하기<a class="headerlink" href="#sls-late" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">push_assigned</span></code>를 <code class="docutils literal notranslate"><span class="pre">push_delivered</span></code>의 도구변수로 사용하는 2SLS입니다. Wald와 동일한 계수를 내면서, 올바른 표준오차(SE)까지 계산해줍니다. 수동으로 ITT / 1st Stage를 계산하면 계수는 맞는데 SE가 틀리므로 라이브러리를 사용하는 것이 좋습니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_iv</span> <span class="o">=</span> <span class="n">IV2SLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span>
+    <span class="s2">&quot;in_app_purchase ~ 1 + [push_delivered ~ push_assigned]&quot;</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">data</span>
+<span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s2">&quot;unadjusted&quot;</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;모델&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;OLS (편향)&quot;</span><span class="p">,</span> <span class="s2">&quot;ITT (희석)&quot;</span><span class="p">,</span> <span class="s2">&quot;2SLS / LATE&quot;</span><span class="p">,</span> <span class="s2">&quot;참값&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;push 계수&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">m_ols</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;push_delivered&#39;</span><span class="p">],</span> <span class="n">itt</span><span class="p">,</span> <span class="n">result_iv</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;push_delivered&#39;</span><span class="p">],</span> <span class="mf">3.0</span><span class="p">],</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>모델</th>
+      <th>push 계수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>OLS (편향)</td>
+      <td>8.411</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ITT (희석)</td>
+      <td>1.531</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2SLS / LATE</td>
+      <td>3.095</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>참값</td>
+      <td>3.000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>OLS(8.4) → ITT(1.5) → 2SLS(3.1) 순서로 참값 3.0에 가까워집니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;OLS</span><span class="se">\n</span><span class="s2">(편향)&quot;</span><span class="p">,</span> <span class="s2">&quot;ITT</span><span class="se">\n</span><span class="s2">(희석)&quot;</span><span class="p">,</span> <span class="s2">&quot;2SLS / LATE</span><span class="se">\n</span><span class="s2">(Complier 효과)&quot;</span><span class="p">,</span> <span class="s2">&quot;참값</span><span class="se">\n</span><span class="s2">(True LATE)&quot;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">m_ols</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;push_delivered&#39;</span><span class="p">],</span> <span class="n">itt</span><span class="p">,</span> <span class="n">result_iv</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;push_delivered&#39;</span><span class="p">],</span> <span class="mf">3.0</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">RED</span><span class="p">,</span> <span class="n">ORANGE</span><span class="p">,</span> <span class="n">BLUE</span><span class="p">,</span> <span class="n">GREEN</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">GREEN</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;추정 계수&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Push 마케팅 효과 추정 비교&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fd35fcb4092b491bdc8ead234d4bbff26793c53cfb89f928e30a0c58ef876b5b.png" src="../_images/fd35fcb4092b491bdc8ead234d4bbff26793c53cfb89f928e30a0c58ef876b5b.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="late">
+<h2>6) 단조성 가정과 LATE의 전제 조건<a class="headerlink" href="#late" title="Link to this heading">#</a></h2>
+<p>LATE 추정이 유효하려면 4가지 조건이 필요합니다.</p>
+<ol class="arabic simple">
+<li><p><strong>독립성:</strong> <span class="math notranslate nohighlight">\(Z\)</span>가 무작위로 배정됩니다.</p></li>
+<li><p><strong>배제 제한:</strong> <span class="math notranslate nohighlight">\(Z\)</span>는 <span class="math notranslate nohighlight">\(T\)</span>를 통해서만 <span class="math notranslate nohighlight">\(Y\)</span>에 영향을 줍니다.</p></li>
+<li><p><strong>1단계:</strong> <span class="math notranslate nohighlight">\(Z\)</span>가 <span class="math notranslate nohighlight">\(T\)</span>에 실제로 영향을 줍니다.</p></li>
+<li><p><strong>단조성:</strong> <span class="math notranslate nohighlight">\(T_{i1} \geq T_{i0}\)</span> — Defier가 없습니다.</p></li>
+</ol>
+<p>단조성은 “Push 배정을 받으면, 배정받지 않은 경우보다 Push를 받을 확률이 높다”는 자연스러운 가정입니다. 데이터에서는 <span class="math notranslate nohighlight">\((Z=0, T=1)\)</span> 셀, 즉 배정받지 않았는데 처치를 받은 비율(Always Taker)이 0에 가까우면 단조성이 성립한다고 볼 수 있습니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">push_assigned</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">push_delivered</span><span class="p">,</span>
+                 <span class="n">rownames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;push_assigned (Z)&#39;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;push_delivered (T)&#39;</span><span class="p">],</span>
+                 <span class="n">normalize</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">always_taker</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">never_taker</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">complier</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">always_taker</span> <span class="o">-</span> <span class="n">never_taker</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;집단&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Always Taker&quot;</span><span class="p">,</span> <span class="s2">&quot;Never Taker&quot;</span><span class="p">,</span> <span class="s2">&quot;Complier&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;비율&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">always_taker</span><span class="p">,</span> <span class="n">never_taker</span><span class="p">,</span> <span class="n">complier</span><span class="p">],</span>
+    <span class="s2">&quot;위치&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;(Z=0, T=1)&quot;</span><span class="p">,</span> <span class="s2">&quot;(Z=1, T=0)&quot;</span><span class="p">,</span> <span class="s2">&quot;1 - 나머지&quot;</span><span class="p">]</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>집단</th>
+      <th>비율</th>
+      <th>위치</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Always Taker</td>
+      <td>0.000</td>
+      <td>(Z=0, T=1)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Never Taker</td>
+      <td>0.505</td>
+      <td>(Z=1, T=0)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Complier</td>
+      <td>0.495</td>
+      <td>1 - 나머지</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Always Taker 비율이 0으로 단조성이 성립합니다. Never Taker가 약 50%이므로, Complier는 나머지 약 50%입니다.</p>
+</section>
+<hr class="docutils" />
+<section id="itt-vs-late">
+<h2>7) ITT vs LATE: 어떤 질문에 답하는가?<a class="headerlink" href="#itt-vs-late" title="Link to this heading">#</a></h2>
+<p>두 추정치는 서로 다른 질문에 답합니다.</p>
+<ul class="simple">
+<li><p><strong>ITT</strong>: “이번 캠페인을 전체 고객에게 배정하면 총 매출이 얼마나 늘어나는가?” Never Taker가 포함된 현실적인 운영 환경을 반영하므로 비즈니스 의사결정에 적합합니다.</p></li>
+<li><p><strong>LATE</strong>: “Push를 기술적으로 개선해서 모든 고객에게 전달된다면 효과가 얼마나 될까?” 처치 기술 자체의 효과를 봅니다. 단, 항상 “이 효과는 Complier에 국한된 것”임을 명시해야 합니다.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compliers_inc</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="o">.</span><span class="n">push_assigned</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">push_delivered</span><span class="o">==</span><span class="mi">1</span><span class="p">)][</span><span class="s1">&#39;income&#39;</span><span class="p">]</span>
+<span class="n">never_inc</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="o">.</span><span class="n">push_assigned</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">push_delivered</span><span class="o">==</span><span class="mi">0</span><span class="p">)][</span><span class="s1">&#39;income&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">z_val</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Z=0 (미배정)&#39;</span><span class="p">,</span> <span class="n">GRAY</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Z=1 (배정)&#39;</span><span class="p">,</span> <span class="n">BLUE</span><span class="p">)]:</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">push_assigned</span> <span class="o">==</span> <span class="n">z_val</span><span class="p">][</span><span class="s1">&#39;in_app_purchase&#39;</span><span class="p">],</span>
+                 <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;in_app_purchase&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ITT = </span><span class="si">{</span><span class="n">itt</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">  |  배정(Z)별 인앱 구매 분포&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">compliers_inc</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.65</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Compliers (n=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">compliers_inc</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="n">GREEN</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">never_inc</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.65</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Never Takers (n=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">never_inc</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="n">GRAY</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;소득 (income)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Complier vs Never Taker 소득 분포&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7e51c54d36a795269abcb336bae896f638a32a0c1867e0102d96535891df53ca.png" src="../_images/7e51c54d36a795269abcb336bae896f638a32a0c1867e0102d96535891df53ca.png" />
+</div>
+</div>
+<p>오른쪽 그래프에서 Complier(초록)는 소득이 높고, Never Taker(회색)는 소득이 낮습니다. OLS가 단순 비교를 했을 때 이 소득 차이를 Push 효과로 잘못 귀속시켰던 것입니다.</p>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>핵심 정리<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>개념</p></th>
+<th class="head"><p>정의</p></th>
+<th class="head"><p>비고</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Non-Compliance</strong></p></td>
+<td><p>배정(<span class="math notranslate nohighlight">\(Z\)</span>)과 실제 처치(<span class="math notranslate nohighlight">\(T\)</span>)가 불일치</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Compliers</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(T_0=0, T_1=1\)</span></p></td>
+<td><p>IV 추정의 타겟</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Never Takers</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(T_0=0, T_1=0\)</span></p></td>
+<td><p>1단계를 희석</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Always Takers</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(T_0=1, T_1=1\)</span></p></td>
+<td><p>절편 ≠ 0이면 존재</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>ITT</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(E[Y\mid Z=1] - E[Y\mid Z=0]\)</span></p></td>
+<td><p>편향 없음, 처치 효과보다 작음</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>1st Stage</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(E[T\mid Z=1] - E[T\mid Z=0]\)</span></p></td>
+<td><p>Complier 비율</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>LATE</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(ITT \;/\; \text{1st Stage}\)</span></p></td>
+<td><p>Complier에 대한 처치 효과</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>단조성</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(T_{i1} \geq T_{i0}\)</span></p></td>
+<td><p>Defier 없음</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>IV를 바라보는 새로운 시각: 8장에서 IV를 “관찰 불가 교란변수를 우회하는 방법”으로 배웠다면, 9장에서는 IV를 “인과 사슬의 시작점”으로 봅니다. IV 추정치는 항상 <strong><span class="math notranslate nohighlight">\(Z\)</span>에 의해 <span class="math notranslate nohighlight">\(T\)</span>가 변한 사람들(Complier)</strong> 에 대한 효과입니다.</p>
+</div></blockquote>
+<hr class="docutils" />
+<p><em>참고: Matheus Facure, Python Causality Handbook, Chapter 09</em><br />
+<em>Angrist, Imbens &amp; Rubin (1996). Identification of Causal Effects Using Instrumental Variables. JASA.</em></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="08_instrumental_variables_ko.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">08 — Instrumental Variables</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1) 4가지 컴플라이언스 유형</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#push-non-compliance">2) Push 마케팅 예시: Non-Compliance의 함정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ols">3) OLS가 왜 틀리는가?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itt-intent-to-treat">4) ITT(Intent-to-Treat): 편향 없지만 희석된 추정치</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#late-complier">5) LATE: Complier에 대한 처치 효과</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wald-estimator">5-1. 1단계와 Wald Estimator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sls-late">5-2. 2SLS로 LATE 구하기</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#late">6) 단조성 가정과 LATE의 전제 조건</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itt-vs-late">7) ITT vs LATE: 어떤 질문에 답하는가?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">핵심 정리</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By cloudyflavor
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
