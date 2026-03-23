@@ -1,13 +1,13 @@
 version: 1
 project:
-  title: 인과추론 스터디 노트  # ✏️ 바꿔야 함: 사이트 제목
-  github: https://github.com/cloudyflavor/causal-inference-kr  # ✏️ 바꿔야 함: 본인 저장소 URL
+  title: 인과추론 스터디 노트
+  github: https://github.com/cloudyflavor/causal-inference-kr
   toc:
     - file: intro_ko.md
-    - file: chapters/07_beyond_confounders_ko.ipynb  # ✏️ 바꿔야 함: 챕터 파일 목록
+    - file: chapters/07_beyond_confounders_ko.ipynb
     - file: chapters/08_instrumental_variables_ko.ipynb
     - file: chapters/09_non_compliance_late_ko.ipynb
 site:
   template: book-theme
-  title: 인과추론 스터디 노트  # ✏️ 바꿔야 함: 브라우저 탭 제목
-  baseurl: /causal-inference-kr  # ✏️ 바꿔야 함: 본인 저장소 이름
+  title: 인과추론 스터디 노트
+  baseurl: /causal-inference-kr/
