@@ -1,4 +1,4 @@
-title: 인과추론 스터디 노트
-author: cloudyflavor
+title: 인과추론 스터디 노트  # ✏️ 바꿔야 함: 사이트 제목
+author: cloudyflavor         # ✏️ 바꿔야 함: 본인 GitHub 아이디 또는 이름
 execute:
-  execute_notebooks: "off"
+  execute_notebooks: "off"   # 노트북을 빌드 시 재실행하지 않음 (출력 결과 그대로 사용)
