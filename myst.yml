@@ -10,3 +10,5 @@ project:
 site:
   template: book-theme
   title: Causal Studio
+  options:
+    logo_text: Causal Studio
