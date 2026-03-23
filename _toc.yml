@@ -1,0 +1,6 @@
+format: jb-book
+root: intro_ko
+chapters:
+  - file: 07_beyond_confounders_ko
+  - file: 08_instrumental_variables_ko
+  - file: 09_non_compliance_late_ko
