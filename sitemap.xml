@@ -13,4 +13,7 @@
   <url>
     <loc>http://localhost:3000/non-compliance-late-ko</loc>
   </url>
+  <url>
+    <loc>http://localhost:3000/hatarogeneous-treatment-effects-ko</loc>
+  </url>
 </urlset>
