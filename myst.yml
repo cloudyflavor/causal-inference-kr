@@ -7,6 +7,7 @@ project:
     - file: chapters/07_beyond_confounders_ko.ipynb
     - file: chapters/08_instrumental_variables_ko.ipynb
     - file: chapters/09_non_compliance_late_ko.ipynb
+    - file: chapters/18_hatarogeneous_treatment_effects_ko.ipynb
 site:
   template: book-theme
   title: Causal Studio
