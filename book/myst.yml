@@ -1,0 +1,15 @@
+version: 1
+project:
+  title: Causal Studio
+  github: https://github.com/cloudyflavor/causal-inference-kr
+  toc:
+    - file: intro_ko.md
+    - file: chapters/07_beyond_confounders_ko.ipynb
+    - file: chapters/08_instrumental_variables_ko.ipynb
+    - file: chapters/09_non_compliance_late_ko.ipynb
+    - file: chapters/18_hatarogeneous_treatment_effects_ko.ipynb
+site:
+  template: book-theme
+  title: Causal Studio
+  options:
+    logo_text: Causal Studio
